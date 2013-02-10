@@ -11,6 +11,9 @@ Cloning
 -------
 
 git clone https://github.com/gimsieke/Hub hub
+
 cd hub
+
 git submodule init
+
 git submodule update
