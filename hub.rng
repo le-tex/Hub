@@ -82,10 +82,9 @@
     </html:li>
   </html:ul>
 
-  <include href="css/css.rng">
+  <include href="css/cssa-publisher-extensions.rng">
 
     <define name="custom.css-like.attributes">
-      <ref name="hub.att.list-type"/>
       <ref name="hub.att.numbering-starts-at"/>
       <ref name="hub.att.numbering-level"/>
       <ref name="hub.att.numbering-continue"/>
@@ -109,33 +108,6 @@
     </define>
   </include>
 
-  <define name="hub.att.list-type">
-    <optional>
-      <attribute name="list-type"/>
-    </optional>
-  </define>
-
-  <define name="hub.att.numbering-starts-at">
-    <optional>
-      <attribute name="numbering-starts-at"/>
-    </optional>
-  </define>
-
-  <define name="hub.att.numbering-level">
-    <optional>
-      <attribute name="numbering-level">
-        <data type="integer"/>
-      </attribute>
-    </optional>
-  </define>
-
-  <define name="hub.att.numbering-continue">
-    <optional>
-      <attribute name="numbering-continue">
-        <ref name="css_pattern.boolean"/>
-      </attribute>
-    </optional>
-  </define>
 
   <include href="dbk/docbook.rng">
     <define name="db.version.attribute">
@@ -285,79 +257,6 @@
     <ref name="db.bridgehead.renderas-enum.attribute"/>
   </define>
   
-  <define name="hub.declare.tabs">
-    <optional>
-      <ref name="hub.tabs.declaration.element"/>
-    </optional>
-  </define>
-
-  <define name="hub.tabs.declaration.element">
-    <element name="tabs">
-      <zeroOrMore>
-        <ref name="hub.tab.declaration.element"/>
-      </zeroOrMore>
-    </element>
-  </define>
-
-  <define name="hub.style-link.element">
-    <element name="linked-style">
-      <attribute name="name"/>
-      <attribute name="layout-type">
-        <ref name="css_rule_att.layout-type.model"/>
-      </attribute>
-    </element>
-  </define>
-  
-  <define name="hub.tab.declaration.element">
-    <element name="tab">
-      <ref name="hub.tab.declaration.attributes" />
-    </element>
-  </define>
-
-  <define name="hub.tab.declaration.attributes">
-    <interleave>
-      <ref name="hub.tab.declaration.align.att"/>
-      <ref name="hub.tab.declaration.alignment-char.att"/>
-      <ref name="hub.tab.declaration.leader.att"/>
-      <ref name="hub.tab.declaration.horizontal-position.att"/>
-    </interleave>
-  </define>
-
-  <define name="hub.tab.declaration.align.att">
-    <optional>
-      <attribute name="align">
-        <choice>
-          <value>left</value>
-          <value>right</value>
-          <value>center</value>
-        </choice>
-      </attribute>
-    </optional>
-  </define>
-
-  <define name="hub.tab.declaration.alignment-char.att">
-    <optional>
-      <attribute name="alignment-char">
-        <data type="token">
-          <param name="pattern">\S</param>
-        </data>
-      </attribute>
-    </optional>
-  </define>
-
-  <define name="hub.tab.declaration.leader.att">
-    <optional>
-      <attribute name="leader" />
-    </optional>
-  </define>
-
-  <define name="hub.tab.declaration.horizontal-position.att">
-    <optional>
-      <attribute name="horizontal-position">
-        <ref name="css_pattern.length"/>
-      </attribute>
-    </optional>
-  </define>
 
   <define name="hub.inline.tab">
     <element name="tab">
