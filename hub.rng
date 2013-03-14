@@ -297,6 +297,7 @@
     <s:let
       name="boolean-hub-keywords" 
       value="(
+               'used-rules-only', 
                'hierarchized', 
                'formatting-deviations-only',
                'layout-attributes-permitted-on-phrase',
