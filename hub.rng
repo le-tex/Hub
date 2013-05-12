@@ -183,11 +183,6 @@
                 <s:assert test="not(.//db:table)">table must not occur among the children or descendants of entry</s:assert>
              </s:rule>
           </s:pattern>
-          <s:pattern name="Element exclusion">
-             <s:rule context="db:entry">
-                <s:assert test="not(.//db:informaltable)">informaltable must not occur among the children or descendants of entry</s:assert>
-             </s:rule>
-          </s:pattern>
           <ref name="db.entry.attlist"/>
           <zeroOrMore>
              <ref name="db.all.blocks"/>
@@ -263,6 +258,14 @@
       <optional>
         <ref name="hub.inline.tab.role"/>
       </optional>
+      <optional>
+        <attribute name="xml:space">
+          <choice>
+            <value>default</value>
+            <value>preserve</value>
+          </choice>
+        </attribute>
+      </optional>
     </element>
   </define>
 
@@ -325,15 +328,15 @@ source-dir-uri: URI of the (temporary) directory where the archive was unzipped.
     <s:let
       name="hub-source-types" 
       value="('idml', 'docx', 'xhtml10', 'xhtml11', 'xhtml5', 'epub20', 'epub30', 'odt')" />
-    <s:rule context="/*/db:info/db:keywordset[@role eq 'hub']/db:keyword">
+    <s:rule context="db:info/db:keywordset[@role eq 'hub']/db:keyword">
       <s:assert test="@role = $hub-keywords" role="WRN">Hub keywords must have one of these role attributes: [<s:value-of select="$hub-keywords"/>]. Found: <s:value-of select="@role"/>.
       </s:assert>
     </s:rule>
-    <s:rule context="/*/db:info/db:keywordset[@role eq 'hub']/db:keyword[@role = $boolean-hub-keywords]">
+    <s:rule context="db:info/db:keywordset[@role eq 'hub']/db:keyword[@role = $boolean-hub-keywords]">
       <s:assert test=". = ('true', 'false')" role="ERR">Boolean Hub keywords must be either 'true' or 'false'.
       </s:assert>
     </s:rule>
-    <s:rule context="/*/db:info/db:keywordset[@role eq 'hub']/db:keyword[@role = 'source-type']">
+    <s:rule context="db:info/db:keywordset[@role eq 'hub']/db:keyword[@role = 'source-type']">
       <s:assert test=". = $hub-source-types" role="WRN">Hub keyword source-type must be one of [<s:value-of select="$hub-source-types"/>].
       </s:assert>
     </s:rule>
