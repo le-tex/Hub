@@ -259,12 +259,7 @@
         <ref name="hub.inline.tab.role"/>
       </optional>
       <optional>
-        <attribute name="xml:space">
-          <choice>
-            <value>default</value>
-            <value>preserve</value>
-          </choice>
-        </attribute>
+        <ref name="db.modifier.xml.space.attribute"/>
       </optional>
     </element>
   </define>
