@@ -213,6 +213,9 @@
     <element name="hub">
       <ref name="db.version.attribute"/>
       <optional>
+        <ref name="db.xml.base.attribute"/>
+      </optional>
+      <optional>
         <ref name="css_meta_att.rule-map"/>
       </optional>
       <optional>
