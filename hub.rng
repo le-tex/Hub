@@ -294,6 +294,12 @@
     </element>
   </define>
 
+  <a:documentation>
+    archive-dir-uri: URI of the directory containing the .idml, .docx, … container file. Should be used by applications
+    that process images etc. that reside outside the container and that are linked to with a relative path. 
+    source-dir-uri: URI of the (temporary) directory where the archive was unzipped. Should be used by applications that 
+    process unzipped archive content.    
+  </a:documentation>
   <s:pattern name="Hub keywords">
     <s:let
       name="boolean-hub-keywords" 
@@ -307,12 +313,6 @@
                'source-paths',
                'titles-associated-with-floats'
              )" />
-    <a:documentation>
-archive-dir-uri: URI of the directory containing the .idml, .docx, … container file. Should be used by applications
-  that process images etc. that reside outside the container and that are linked to with a relative path. 
-source-dir-uri: URI of the (temporary) directory where the archive was unzipped. Should be used by applications that 
-  process unzipped archive content.    
-    </a:documentation>
     <s:let
       name="hub-keywords" 
       value="(
