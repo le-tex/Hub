@@ -211,13 +211,7 @@
 
   <define name="hub.root">
     <element name="hub">
-      <ref name="db.version.attribute"/>
-      <optional>
-        <ref name="db.xml.base.attribute"/>
-      </optional>
-      <optional>
-        <ref name="css_meta_att.rule-map"/>
-      </optional>
+      <ref name="db.common.base.attributes"/>
       <optional>
         <ref name="db.info"/>
       </optional>
@@ -236,6 +230,12 @@
       <ref name="hub.block.hr"/>
   </define>
 
+  <define name="db.common.base.attributes" combine="interleave">
+    <optional>
+      <ref name="css_meta_att.rule-map"/>
+    </optional>
+  </define>
+    
   <define name="db.common.attributes" combine="interleave">
      <optional>
         <attribute name="srcpath">
