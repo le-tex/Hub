@@ -6,7 +6,14 @@
   version="5.1-variant le-tex_Hub-1.1"
   css:version="3.0-variant le-tex_Hub-1.1"
   css:rule-selection-attribute="role">
-  <poetry>
+  <info>
+    <css:rules>
+      <css:rule name="center" layout-type="object" 
+        css:text-align="center" 
+        css:text-align-last="center"/>
+    </css:rules>
+  </info>
+  <poetry role="center">
     <title>Hub 1.1 basiert jetzt auf DocBook Publishers V5.1CR1-1</title>
     <linegroup>
       <line>Welt-Herrschaftsplan leider zunichte:</line>
