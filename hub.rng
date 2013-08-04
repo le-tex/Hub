@@ -17,7 +17,7 @@
 
   <html:h1>le-tex Hub Format</html:h1>
 
-  <html:p>Hub is a DocBook 5.1 derivative with the following modifications:</html:p>
+  <html:p>Hub is a DocBook 5.1 (precisely: DocBook Publishers V5.1CR1-1) derivative with the following modifications:</html:p>
 
   <html:ul>
     <html:li>
@@ -69,6 +69,10 @@
     <html:li>
       <html:p>There are additional inline elements: 'tab' and 'br'. Note that the inline 'tab' follows a content model
         that is different from the tabs/tab element (in the tab declarations).</html:p>
+    </html:li>
+    <html:li>
+      <html:p>itemizedlist/@mark and listitem/@override are treated as literal list marker strings, rather than as names of
+        something.</html:p>
     </html:li>
     <html:li>
       <html:p>There are mandatory and fixed attributes on /*: @version, @css:version, and
@@ -190,8 +194,20 @@
        </element>
     </define>
 
-    <define name="db.topic"><notAllowed/></define>
-    <define name="db.reference"><notAllowed/></define>
+    <define name="db.itemizedlist.mark.attribute">
+      <attribute name="mark">
+        <a:documentation>Literal string to be used as a list marker for all items without override.</a:documentation>
+        <data type="string"/>
+      </attribute>
+    </define>
+
+    <define name="db.listitem.override.attribute">
+      <attribute name="override">
+        <a:documentation>Literal string that should be used as a list marker.</a:documentation>
+        <data type="string"/>
+      </attribute>
+    </define>
+    
     <define name="db.technical.blocks"><notAllowed/></define>
     
   </include>
@@ -219,7 +235,7 @@
     </element>
   </define>
 
-  <define name="db.extension.inlines" combine="choice">
+  <define name="db.publishing.inlines" combine="choice">
     <choice>
       <ref name="hub.inline.tab"/>
       <ref name="hub.inline.br"/>
@@ -262,7 +278,7 @@
         <ref name="hub.inline.tab.role"/>
       </optional>
       <optional>
-        <ref name="db.modifier.xml.space.attribute"/>
+        <ref name="db.verbatim.xml.space.attribute"/>
       </optional>
     </element>
   </define>
