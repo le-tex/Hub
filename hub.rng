@@ -221,7 +221,10 @@
       <zeroOrMore>
         <ref name="db.all.blocks"/>
       </zeroOrMore>
-      <ref name="db.book.components"/>
+      <choice>
+        <ref name="db.book.components"/>
+        <ref name="db.article.components"/>
+      </choice>
     </choice>
   </define>
 
