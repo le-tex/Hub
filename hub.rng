@@ -274,7 +274,50 @@
     <ref name="db.bridgehead.renderas-enum.attribute"/>
   </define>
   
-
+  <div>
+    <define name="db.annotation.role.attribute">
+      <attribute name="role"/>
+    </define>
+    <define name="db.annotation.annotates.attribute">
+      <attribute name="annotates">
+        <a:documentation>Identifies one ore more elements to which this annotation applies</a:documentation>
+      </attribute>
+    </define>
+    <define name="db.annotation.attlist">
+      <interleave>
+        <optional>
+          <ref name="db.annotation.role.attribute"/>
+        </optional>
+        <optional>
+          <ref name="db.annotation.annotates.attribute"/>
+        </optional>
+        <ref name="db.common.attributes"/>
+      </interleave>
+    </define>
+    <define name="db.annotation.info">
+      <ref name="db._info.title.only"/>
+    </define>
+    <define name="db.annotation">
+      <element name="annotation">
+        <a:documentation>An annotation</a:documentation>
+        <s:pattern name="Element exclusion">
+          <s:rule context="db:annotation">
+            <s:assert test="not(.//db:annotation)">annotation must not occur in the descendants of annotation</s:assert>
+          </s:rule>
+        </s:pattern>
+        <ref name="db.annotation.attlist"/>
+        <ref name="db.annotation.info"/>
+        <oneOrMore>
+          <ref name="db.all.blocks"/>
+        </oneOrMore>
+      </element>
+    </define>
+  </div>
+  
+  <define name="db.ubiq.inlines" combine="choice">
+    <ref name="db.annotation"/>
+  </define>
+  
   <define name="hub.inline.tab">
     <element name="tab">
       <optional>
