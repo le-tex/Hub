@@ -256,12 +256,16 @@
   </define>
     
   <define name="db.common.attributes" combine="interleave">
-     <optional>
-        <attribute name="srcpath">
-          <data type="anyURI"/>
-        </attribute>
-     </optional>
+    <ref name="hub.att.srcpath"/>
     <ref name="css_attributes"/>
+  </define>
+
+  <define name="hub.att.srcpath">
+    <optional>
+      <attribute name="srcpath">
+        <data type="anyURI"/>
+      </attribute>
+    </optional>
   </define>
 
   <define name="db.info.elements" combine="interleave">
@@ -343,6 +347,7 @@
 
   <define name="hub.inline.br">
     <element name="br">
+      <ref name="hub.att.srcpath"/>
       <empty/>
     </element>
   </define>
