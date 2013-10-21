@@ -8,12 +8,20 @@
   css:rule-selection-attribute="role">
   <info>
     <css:rules>
+      <css:page pseudo="first right" name="foo" css:font-family="sans-serif">
+        <css:page-margin-box location="top-center" css:content="'This is no running head'" css:font-style="italic"/>
+        <css:page-margin-box location="top-right-corner" css:content="''"/>
+      </css:page>
+      <css:page pseudo="right" name="foo" css:font-family="sans-serif">
+        <css:page-margin-box location="top-center" css:content="'This is a running head'" css:font-style="italic"/>
+        <css:page-margin-box location="top-right-corner" css:content="'#'"/>
+      </css:page>
       <css:rule name="center" layout-type="object" 
         css:text-align="center" 
         css:text-align-last="center"/>
     </css:rules>
   </info>
-  <poetry role="center">
+  <poetry role="center" css:page="foo">
     <title>Hub 1.1 basiert jetzt auf DocBook Publishers V5.1CR1-1</title>
     <linegroup>
       <line>Welt-Herrschaftsplan leider zunichte:</line>
