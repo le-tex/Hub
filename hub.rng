@@ -291,6 +291,16 @@
     <ref name="db.bridgehead.renderas-enum.attribute"/>
   </define>
   
+  <define name="db.bridgehead.renderas.enumeration" combine="choice">
+    <choice>
+      <value>sect6</value>
+      <value>sect7</value>
+      <value>sect8</value>
+      <value>sect9</value>
+      <value>sect10</value>
+    </choice>
+  </define>
+  
   <div>
     <define name="db.annotation.role.attribute">
       <attribute name="role"/>
