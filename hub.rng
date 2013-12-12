@@ -112,6 +112,16 @@
     </define>
   </include>
 
+  <include href="mml/mathml3-restricted.rng">
+    <start combine="choice">
+      <notAllowed/>
+    </start>
+    <define name="anyElement">
+      <a:documentation>Will get an error message pertaining to xml:id when leaving it as is.
+      Didn’t do research as to why.</a:documentation>
+      <empty/>
+    </define>
+  </include>
 
   <include href="dbk/docbook.rng">
     <define name="db.version.attribute">
@@ -128,6 +138,9 @@
     </define>
     <define name="db._any.attribute">
       <empty/>
+    </define>
+    <define name="db._any.mml">
+      <ref name="math"/>
     </define>
     
     <define name="db.title">
