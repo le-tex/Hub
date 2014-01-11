@@ -337,6 +337,7 @@
   
   <define name="hub.inline.tab">
     <element name="tab">
+      <ref name="hub.att.srcpath"/>
       <optional>
         <ref name="hub.inline.tab.role"/>
       </optional>
