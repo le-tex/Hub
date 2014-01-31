@@ -262,15 +262,12 @@
 
   <define name="db.all.blocks" combine="choice">
     <choice>
-      <ref name="db.nopara.blocks"/>
-      <ref name="db.para.blocks"/>
-      <ref name="db.extension.blocks"/>
       <ref name="hub.div"/>
     </choice>
   </define>
 
   <define name="hub.div">
-    <a:documentation>Allow div (example: html to hub conversion)</a:documentation>
+    <a:documentation>Allow div (example: html to hub conversion).</a:documentation>
     <element name="div">
       <zeroOrMore>
         <choice>
