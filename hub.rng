@@ -260,6 +260,25 @@
     </element>
   </define>
 
+  <define name="db.all.blocks" combine="choice">
+    <choice>
+      <ref name="hub.div"/>
+    </choice>
+  </define>
+
+  <define name="hub.div">
+    <a:documentation>Allow div (example: html to hub conversion).</a:documentation>
+    <element name="div">
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="db.all.blocks"/>
+          <empty/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+
   <define name="db.publishing.inlines" combine="choice">
     <choice>
       <ref name="hub.inline.tab"/>
