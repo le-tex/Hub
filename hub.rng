@@ -123,6 +123,12 @@
     </define>
   </include>
 
+  <include href="svg/svg11.rng">
+    <start combine="choice">
+      <notAllowed/>
+    </start>
+  </include>
+
   <include href="dbk/docbook.rng">
     <define name="db.version.attribute">
       <attribute name="version">
@@ -141,6 +147,9 @@
     </define>
     <define name="db._any.mml">
       <ref name="math"/>
+    </define>
+    <define name="db._any.svg">
+      <ref name="svg"/>
     </define>
     
     <define name="db.title">
