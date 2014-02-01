@@ -269,6 +269,10 @@
   <define name="hub.div">
     <a:documentation>Allow div (example: html to hub conversion).</a:documentation>
     <element name="div">
+      <ref name="db.common.attributes"/>
+      <optional>
+        <attribute name="role"/>
+      </optional>
       <zeroOrMore>
         <choice>
           <text/>
