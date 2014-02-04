@@ -25,7 +25,7 @@
       but no hierarchy (section, chapter, part, etc.).</html:p>
     </html:li>
     <html:li>
-      <html:p>There is an optional /*/info[@role='hub'] element that contains certain keywords (keyword[@role='…']):</html:p>
+      <html:p>There is an optional /*/info/keywordset[@role='hub'] element that contains certain keywords (keyword[@role='…']):</html:p>
       <html:ul>
         <html:li>
           <html:p>hierarchized (boolean): whether there is a proper nested part/chapter/section hierarchy</html:p>
