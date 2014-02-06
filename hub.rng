@@ -231,6 +231,17 @@
     </define>
     
     <define name="db.technical.blocks"><notAllowed/></define>
+
+    <define name="db.floatstyle.attribute">
+      <attribute name="floatstyle">
+         <a:documentation>Either object is floating (position near reference, for example at bottom of the page) 
+          or fixed (i.e. anchored with a paragraph).</a:documentation>
+         <choice>
+           <value>float</value>
+           <value>fixed</value>
+         </choice>
+      </attribute>
+   </define>
     
   </include>
 
