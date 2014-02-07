@@ -25,7 +25,7 @@
       but no hierarchy (section, chapter, part, etc.).</html:p>
     </html:li>
     <html:li>
-      <html:p>There is an optional /*/info/keywordset[@role='hub'] element that contains certain keywords (keyword[@role='…']):</html:p>
+      <html:p>There is an optional /*/info[@role='hub'] element that contains certain keywords (keyword[@role='…']):</html:p>
       <html:ul>
         <html:li>
           <html:p>hierarchized (boolean): whether there is a proper nested part/chapter/section hierarchy</html:p>
@@ -177,6 +177,15 @@
             <ref name="db.nopara.blocks"/>
           </choice>
         </zeroOrMore>
+      </element>
+    </define>
+
+    <define name="db.abstract">
+      <element name="abstract">
+        <a:documentation>A summary. Section and block elements allowed (DocBook: element para, only)</a:documentation>
+        <ref name="db.abstract.attlist"/>
+        <ref name="db.abstract.info"/>
+        <ref name="db.toplevel.blocks.or.sections"/>
       </element>
     </define>
 
@@ -414,7 +423,7 @@
 
   <define name="hub.inline.br">
     <element name="br">
-      <ref name="hub.att.srcpath"/>
+      <ref name="db.common.attributes"/>
       <empty/>
     </element>
   </define>
@@ -424,6 +433,7 @@
     May also used to capture thematic breaks expressed as *** lines.
     You may use CSS like css:content="'***'" css:text-justify="center" css:font-weight="bold"</a:documentation>
     <element name="hr">
+      <ref name="db.common.attributes"/>
       <empty/>
     </element>
   </define>
