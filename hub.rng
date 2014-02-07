@@ -250,7 +250,15 @@
            <value>fixed</value>
          </choice>
       </attribute>
-   </define>
+    </define>
+
+    <define name="db.colspec.colwidth.attribute">
+      <attribute name="colwidth">
+        <a:documentation>Specifies the width of the column. 
+          Value must match definition of css_pattern.width.</a:documentation>
+        <ref name="css_pattern.width"/>
+      </attribute>
+    </define>
     
   </include>
 
