@@ -222,7 +222,7 @@
     <define name="db.entry">
        <element name="entry">
           <a:documentation>A cell in a table</a:documentation>
-          <s:pattern name="Element exclusion">
+          <s:pattern >
              <s:rule context="db:entry">
                 <s:assert test="not(.//db:table)">table must not occur among the children or descendants of entry</s:assert>
              </s:rule>
@@ -397,7 +397,7 @@
     <define name="db.annotation">
       <element name="annotation">
         <a:documentation>An annotation</a:documentation>
-        <s:pattern name="Element exclusion">
+        <s:pattern >
           <s:rule context="db:annotation">
             <s:assert test="not(.//db:annotation)">annotation must not occur in the descendants of annotation</s:assert>
           </s:rule>
@@ -462,7 +462,7 @@
     source-dir-uri: URI of the (temporary) directory where the archive was unzipped. Should be used by applications that 
     process unzipped archive content.    
   </a:documentation>
-  <s:pattern name="Hub keywords">
+  <s:pattern >
     <s:let
       name="boolean-hub-keywords" 
       value="(
@@ -502,19 +502,19 @@
     </s:rule>
   </s:pattern>
 
-  <s:pattern name="CSS version required">
+  <s:pattern >
     <s:rule context="/*[.//*[@css:*]]">
       <s:assert test="@css:version">If CSS attributes are used, the css:version attribute is mandatory.</s:assert>
     </s:rule>
   </s:pattern>
 
-  <s:pattern name="Tab declaration only for paragraph styles">
+  <s:pattern >
     <s:rule context="css:rule[db:tabs]">
       <s:assert test="@layout-type = 'para'">Tab declarations are only meaningful within paragraph styles.</s:assert>
     </s:rule>
   </s:pattern>
 
-  <s:pattern name="Linked styles must exist.">
+  <s:pattern >
     <s:rule context="css:rule[db:linked-style]">
       <s:let name="layout-type" value="db:linked-style/@layout-type"/>
       <s:let name="name" value="db:linked-style/@name"/>
@@ -522,7 +522,7 @@
     </s:rule>
   </s:pattern>
 
-  <s:pattern name="No duplicate styles of the same layout type">
+  <s:pattern >
     <s:rule context="css:rule">
       <s:let name="layout-type" value="@layout-type"/>
       <s:let name="name" value="@name"/>
