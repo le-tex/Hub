@@ -17,7 +17,8 @@
 
   <html:h1>le-tex Hub Format</html:h1>
 
-  <html:p>Hub is a DocBook 5.1 (precisely: DocBook Publishers V5.1CR1-1) derivative with the following modifications:</html:p>
+  <html:p>Hub is a DocBook 5.1 (precisely: DocBook Publishers V5.1CR2-1, which includes poetry and RDFa lite, among other things)
+    derivative with the following modifications:</html:p>
 
   <html:ul>
     <html:li>
@@ -71,8 +72,16 @@
         that is different from the tabs/tab element (in the tab declarations).</html:p>
     </html:li>
     <html:li>
+      <html:p>There is also a generic container, 'div'. It is meant to substitute the (ab)use of 'sidebar' for frame-based,
+        possibly anchored, content and pure layout constructs such as the frames itself. They may play a role if CSS regions
+        or the like are adopted in Hub XML.</html:p>
+    </html:li>
+    <html:li>
       <html:p>itemizedlist/@mark and listitem/@override are treated as literal list marker strings, rather than as names of
         something.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>SVG 1.1 and MathML 3 (restricted – the 2.0-compatible version) are included.</html:p>
     </html:li>
     <html:li>
       <html:p>There are mandatory and fixed attributes on /*: @version, @css:version, and
@@ -132,7 +141,7 @@
   <include href="dbk/docbook.rng">
     <define name="db.version.attribute">
       <attribute name="version">
-        <value>5.1-variant le-tex_Hub-1.1</value>
+        <value>5.1-variant le-tex_Hub-1.2</value>
       </attribute>
       <optional>
         <ref name="css_att.version"/>
@@ -295,7 +304,8 @@
   </define>
 
   <define name="hub.div">
-    <a:documentation>Allow div (example: html to hub conversion).</a:documentation>
+    <a:documentation>Allow div as a generic nestable container without semantic 
+    implications (just like an HTML div)</a:documentation>
     <element name="div">
       <ref name="db.common.attributes"/>
       <optional>

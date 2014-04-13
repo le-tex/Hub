@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="http://www.le-tex.de/resource/schema/hub/1.1/hub.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<?xml-model href="http://www.le-tex.de/resource/schema/hub/1.1/hub.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://www.le-tex.de/resource/schema/hub/1.2/hub.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.le-tex.de/resource/schema/hub/1.2/hub.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <hub xmlns="http://docbook.org/ns/docbook"
   xmlns:mml="http://www.w3.org/1998/Math/MathML"
   xmlns:css="http://www.w3.org/1996/css"
-  version="5.1-variant le-tex_Hub-1.1"
+  version="5.1-variant le-tex_Hub-1.2"
   css:version="3.0-variant le-tex_Hub-1.1"
   css:rule-selection-attribute="role">
   <info>
