@@ -481,6 +481,7 @@
                $boolean-hub-keywords,
                'archive-dir-uri',
                'source-type',
+               'source-application',
                'source-basename',
                'source-dir-uri',
                'toc-title'
