@@ -456,6 +456,54 @@
     </element>
   </define>
 
+  <div>
+    <a:documentation>Container for mc:AlternateContent/w:drawing etc. for which no Hub representation exists.</a:documentation>
+    <define name="hub._any.attribute">
+      <attribute>
+        <a:documentation>Any attribute, including any attribute in any namespace.</a:documentation>
+        <anyName/>
+      </attribute>
+    </define>
+
+    <define name="hub._any">
+      <element>
+        <a:documentation>Any element from almost any namespace</a:documentation>
+        <anyName>
+          <except>
+            <nsName/>
+            <nsName ns="http://www.w3.org/1999/xhtml"/>
+            <nsName ns="http://www.w3.org/1998/Math/MathML"/>
+            <nsName ns="http://www.w3.org/2000/svg"/>
+          </except>
+        </anyName>
+        <zeroOrMore>
+          <choice>
+            <ref name="hub._any.attribute"/>
+            <text/>
+            <ref name="hub._any"/>
+            <ref name="db.all.blocks"/>
+          </choice>
+        </zeroOrMore>
+      </element>
+    </define>
+    
+    <define name="hub.foreign.phrase">
+      <element name="phrase">
+        <attribute name="role">
+          <value>hub:foreign</value>
+        </attribute>
+        <ref name="hub.att.srcpath"/>
+        <zeroOrMore>
+          <ref name="hub._any"/>
+        </zeroOrMore>
+      </element>
+    </define>
+    
+    <define name="db.phrase" combine="choice">
+      <ref name="hub.foreign.phrase"/>
+    </define>
+  </div>
+
   <a:documentation>
     archive-dir-uri: URI of the directory containing the .idml, .docx, … container file. Should be used by applications
     that process images etc. that reside outside the container and that are linked to with a relative path. 
