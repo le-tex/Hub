@@ -172,6 +172,22 @@
       </element>
     </define>
 
+    <define name="db.set">
+      <element name="set">
+        <a:documentation>A collection of Hub documents</a:documentation>
+        <ref name="db.common.base.attributes"/>
+        <optional>
+          <ref name="db.title"/>
+        </optional>
+        <optional>
+          <ref name="db._info.title.forbidden"/>
+        </optional>
+        <oneOrMore>
+          <ref name="hub.root"/>
+        </oneOrMore>
+      </element>
+    </define>
+
     <define name="db.para">
       <element name="para">
         <a:documentation>A paragraph</a:documentation>
