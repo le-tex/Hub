@@ -288,10 +288,7 @@
   </include>
 
   <start combine="choice">
-    <choice>
-      <ref name="hub.root"/>
-      <ref name="db.set"/>
-    </choice>
+    <ref name="hub.root"/>
   </start>
 
   <define name="hub.body.components">
@@ -313,26 +310,6 @@
         <ref name="db.info"/>
       </optional>
       <ref name="hub.body.components"/>
-    </element>
-  </define>
-  
-  <define name="db.set" combine="choice">
-    <element name="set">
-      <a:documentation>A collection of hub or set documents</a:documentation>
-      <s:pattern>
-        <s:rule context="/db:set">
-          <s:assert test="@version">If this element is the root element, it must have a version attribute.</s:assert>
-        </s:rule>
-      </s:pattern>
-      <ref name="db.set.attlist"/>
-      <choice>
-        <oneOrMore>
-          <ref name="hub.root"/>
-        </oneOrMore>
-        <oneOrMore>
-          <ref name="db.set"/>
-        </oneOrMore>
-      </choice>
     </element>
   </define>
 
