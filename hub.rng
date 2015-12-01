@@ -449,6 +449,7 @@
         <value>end-nested-style</value>
         <value>footnotemarker</value>
         <value>indent-to-here</value>
+        <value>hub:separator</value>
         <value>left</value>
         <value>right</value>
       </choice>
