@@ -93,6 +93,10 @@
       It may be used by processes that collect errors and warnings (together with the paths where they occurred) to render
       the messages at the corresponding locations in an HTML report.</html:p>
     </html:li>
+    <html:li>
+      <html:p>Index: to give generated page numbers a different style you can insert for example 'hub:pagenum-italic' or
+      'hub:pagenum-bold' to indexterm/@role, so used by le-tex docx2hub and idml2xml.</html:p>
+    </html:li>
   </html:ul>
 
   <include href="css/cssa-publisher-extensions.rng">
