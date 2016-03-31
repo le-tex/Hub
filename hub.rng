@@ -553,7 +553,8 @@
                'source-application',
                'source-basename',
                'source-dir-uri',
-               'toc-title'
+               'toc-title',
+               'type-area-width'
              )" />
     <s:let
       name="hub-source-types" 
