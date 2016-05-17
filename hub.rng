@@ -94,6 +94,9 @@
       the messages at the corresponding locations in an HTML report.</html:p>
     </html:li>
     <html:li>
+      <html:p>Element programlisting (not included in DocBook Publishers V5.1CR2-1): unlike DocBook V5.1CR2 there are info/title, line and linegroup elements possible.</html:p>
+    </html:li>
+    <html:li>
       <html:p>Index: to give generated page numbers a different style you can insert for example 'hub:pagenum-italic' or
       'hub:pagenum-bold' to indexterm/@role, so used by le-tex docx2hub and idml2xml.</html:p>
     </html:li>
@@ -415,10 +418,8 @@
         <ref name="db.textobject"/>
         <oneOrMore>
           <choice>
-            <ref name="db.mediaobject"/>
             <ref name="db.linegroup"/>
             <ref name="db.line"/>
-            <ref name="db.all.blocks"/>
           </choice>
         </oneOrMore>
         <zeroOrMore>
