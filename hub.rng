@@ -594,7 +594,8 @@
       name="boolean-hub-keywords" 
       value="(
                'used-rules-only', 
-               'hierarchized', 
+               'hierarchized',
+               'mathtype2mml'
                'formatting-deviations-only',
                'layout-attributes-permitted-on-phrase',
                'processed-lists',
