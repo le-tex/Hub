@@ -100,6 +100,11 @@
       <html:p>Index: to give generated page numbers a different style you can insert for example 'hub:pagenum-italic' or
       'hub:pagenum-bold' to indexterm/@role, so used by le-tex docx2hub and idml2xml.</html:p>
     </html:li>
+    <html:li>
+      <html:p>To center an floatable object use css:margin-left="auto" and css:margin-right="auto", for left 
+      alignment css:margin-left="0" plus css:margin-right="auto" and align right use
+      css:margin-left="auto" and css:margin-right="0" (see for example tables in docx2hub).</html:p>
+    </html:li>
   </html:ul>
 
   <include href="css/cssa-publisher-extensions.rng">
