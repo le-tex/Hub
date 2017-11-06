@@ -600,7 +600,7 @@
       value="(
                'used-rules-only', 
                'hierarchized',
-               'mathtype2mml'
+               'mathtype2mml',
                'formatting-deviations-only',
                'layout-attributes-permitted-on-phrase',
                'processed-lists',
