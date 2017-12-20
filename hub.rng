@@ -49,6 +49,12 @@
         <html:li>
           <html:p>source-type ('idml', 'docx', 'xhtml11', 'epub20', 'epub30')</html:p>
         </html:li>
+        <html:li>
+          <html:p>footnote-restart whether footnotes are recounted section wise in InDesign (boolean)</html:p>
+        </html:li>
+        <html:li>
+          <html:p>type-area-width width of type area in InDesign</html:p>
+        </html:li>
       </html:ul>
       <html:p>The attributes should be set by converters that perform the corresponding tasks (e.g., hierarchize).
         Missing boolean attributes must be treated as 'false'. Presence of a 'true'-valued attribute does not guarantee
@@ -604,6 +610,7 @@
                'formatting-deviations-only',
                'layout-attributes-permitted-on-phrase',
                'processed-lists',
+               'footnote-restart',
                'marked-identifiers',
                'source-paths',
                'titles-associated-with-floats'
