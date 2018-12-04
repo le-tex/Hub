@@ -557,6 +557,7 @@
         <value>footnotemarker</value>
         <value>indent-to-here</value>
         <value>hub:separator</value>
+        <value>docx2hub:generated</value>
         <value>left</value>
         <value>right</value>
       </choice>
