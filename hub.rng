@@ -291,6 +291,14 @@
     
     <define name="db.technical.blocks"><notAllowed/></define>
 
+    <define name="db.common.req.linking.attributes">
+      <choice>
+        <ref name="db.linkend.attribute"/>
+        <ref name="db.linkends.attribute"/>
+        <ref name="db.xlink.attributes"/>
+      </choice>
+    </define>
+    
     <define name="db.floatstyle.attribute">
       <attribute name="floatstyle">
          <a:documentation>Either object is floating (position near reference, for example at bottom of the page) 
