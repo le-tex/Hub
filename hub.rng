@@ -276,75 +276,69 @@
     </define>
 
     <define name="db.indexterm.contentmodel">
-      <optional>
-        <ref name="db.primary"/>
+      <choice>
         <optional>
-          <ref name="db.secondary"/>
+          <ref name="db.primary"/>
           <optional>
-            <ref name="db.tertiary"/>
+            <ref name="db.secondary"/>
             <optional>
-              <element name="quaternary">
-                <a:documentation>A quaternary word or phrase in an index term</a:documentation>
-                <ref name="db.tertiary.attlist"/>
-                <zeroOrMore>
-                  <ref name="db.all.inlines"/>
-                </zeroOrMore>
-              </element>
+              <ref name="db.tertiary"/>
               <optional>
-                <element name="quinary">
-                  <a:documentation>A quinary word or phrase in an index term</a:documentation>
+                <element name="quaternary">
+                  <a:documentation>A quaternary word or phrase in an index term</a:documentation>
                   <ref name="db.tertiary.attlist"/>
                   <zeroOrMore>
                     <ref name="db.all.inlines"/>
                   </zeroOrMore>
                 </element>
                 <optional>
-                  <element name="senary">
-                    <a:documentation>A senary word or phrase in an index term</a:documentation>
+                  <element name="quinary">
+                    <a:documentation>A quinary word or phrase in an index term</a:documentation>
                     <ref name="db.tertiary.attlist"/>
                     <zeroOrMore>
                       <ref name="db.all.inlines"/>
                     </zeroOrMore>
                   </element>
                   <optional>
-                    <element name="septenary">
-                      <a:documentation>A septenary word or phrase in an index term</a:documentation>
+                    <element name="senary">
+                      <a:documentation>A senary word or phrase in an index term</a:documentation>
                       <ref name="db.tertiary.attlist"/>
                       <zeroOrMore>
                         <ref name="db.all.inlines"/>
                       </zeroOrMore>
                     </element>
                     <optional>
-                      <element name="octonary">
-                        <a:documentation>A octonary word or phrase in an index term</a:documentation>
+                      <element name="septenary">
+                        <a:documentation>A septenary word or phrase in an index term</a:documentation>
                         <ref name="db.tertiary.attlist"/>
                         <zeroOrMore>
                           <ref name="db.all.inlines"/>
                         </zeroOrMore>
                       </element>
                       <optional>
-                        <element name="nonary">
-                          <a:documentation>A nonary word or phrase in an index term</a:documentation>
+                        <element name="octonary">
+                          <a:documentation>A octonary word or phrase in an index term</a:documentation>
                           <ref name="db.tertiary.attlist"/>
                           <zeroOrMore>
                             <ref name="db.all.inlines"/>
                           </zeroOrMore>
                         </element>
                         <optional>
-                          <element name="denary">
-                            <a:documentation>A denary word or phrase in an index term</a:documentation>
+                          <element name="nonary">
+                            <a:documentation>A nonary word or phrase in an index term</a:documentation>
                             <ref name="db.tertiary.attlist"/>
                             <zeroOrMore>
                               <ref name="db.all.inlines"/>
                             </zeroOrMore>
                           </element>
                           <optional>
-                            <choice>
-                              <ref name="db.see"/>
-                              <oneOrMore>
-                                <ref name="db.seealso"/>
-                              </oneOrMore>
-                            </choice>
+                            <element name="denary">
+                              <a:documentation>A denary word or phrase in an index term</a:documentation>
+                              <ref name="db.tertiary.attlist"/>
+                              <zeroOrMore>
+                                <ref name="db.all.inlines"/>
+                              </zeroOrMore>
+                            </element>
                           </optional>
                         </optional>
                       </optional>
@@ -355,15 +349,13 @@
             </optional>
           </optional>
         </optional>
-      </optional>
+      </choice>
       <optional>
-        <choice>
-          <ref name="db.see"/>
-          <oneOrMore>
-            <ref name="db.seealso"/>
-          </oneOrMore>
-        </choice>
+        <ref name="db.see"/>
       </optional>
+      <oneOrMore>
+        <ref name="db.seealso"/>
+      </oneOrMore>
     </define>
 
     <define name="db.itemizedlist.mark.attribute">
