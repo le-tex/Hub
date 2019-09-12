@@ -353,9 +353,9 @@
       <optional>
         <ref name="db.see"/>
       </optional>
-      <oneOrMore>
+      <zeroOrMore>
         <ref name="db.seealso"/>
-      </oneOrMore>
+      </zeroOrMore>
     </define>
 
     <define name="db.itemizedlist.mark.attribute">
