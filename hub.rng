@@ -742,6 +742,7 @@
                'footnote-restart',
                'marked-identifiers',
                'source-paths',
+               'table-captions-moved-above-tables',
                'titles-associated-with-floats'
              )" />
     <s:let
