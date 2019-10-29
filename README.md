@@ -1,7 +1,9 @@
 Hub
 ===
 
-Flattened DocBook plus CSSa.
+Flattened DocBook plus CSSa. 
+
+See [the XML Prague 2013 presentation](https://archive.xmlprague.cz/2013/presentations/Conveying_Layout_Information_with_CSSa/CSSa_xmlprague_gimsieke.html).
 
 The unaltered DocBook Publishers V5.1CR1-1 RNG schema is included here (might have included DocBook as a submodule but didn’t find docbook.rng in its repo).
 
