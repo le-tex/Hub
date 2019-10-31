@@ -752,6 +752,7 @@
                'formatting-deviations-only',
                'layout-attributes-permitted-on-phrase',
                'processed-lists',
+               'endnote-restart',
                'footnote-restart',
                'marked-identifiers',
                'source-paths',
