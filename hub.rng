@@ -176,6 +176,19 @@
     </start>
   </include>
 
+  
+  <define name="db.keyword.inlines">
+    <choice>
+      <text/>
+      <ref name="db.math.inlines"/>
+      <ref name="db._phrase"/>
+      <ref name="db.subscript"/>
+      <ref name="db.superscript"/>
+      <ref name="db.abbrev"/>
+      <ref name="db.acronym"/>
+    </choice>
+  </define>
+
   <include href="dbk/docbook.rng">
     <define name="db.version.attribute">
       <attribute name="version">
@@ -420,7 +433,16 @@
         <ref name="css_pattern.width"/>
       </attribute>
     </define>
-    
+
+    <define name="db.keyword">
+      <element name="keyword">
+        <a:documentation>One of a set of keywords describing the content of a document</a:documentation>
+        <ref name="db.keyword.attlist"/>
+        <zeroOrMore>
+          <ref name="db.keyword.inlines"/>
+        </zeroOrMore>
+      </element>
+    </define>
   </include>
 
   <start combine="choice">
