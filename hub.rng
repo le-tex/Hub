@@ -189,6 +189,33 @@
     </choice>
   </define>
 
+  <define name="hub.biblioref">
+    <choice>
+      <element name="biblioref">
+        <a:documentation>A cross-reference to a bibliographic entry</a:documentation>
+        <ref name="db.biblioref.attlist"/>
+        <empty/>
+      </element>
+      <element name="biblioref">
+        <a:documentation>A cross reference to a biblio entry already containing text</a:documentation>
+        <choice>
+          <ref name="db.linkends.attribute"/>
+          <ref name="db.linkend.attribute"/>
+        </choice>
+        <optional>
+          <ref name="db.common.attributes"/>
+        </optional>
+        <oneOrMore>
+          <choice>
+            <text/>
+            <ref name="db.ubiq.inlines"/>
+            <ref name="db._phrase"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </choice>
+  </define>
+
   <include href="dbk/docbook.rng">
     <define name="db.version.attribute">
       <attribute name="version">
@@ -442,6 +469,10 @@
           <ref name="db.keyword.inlines"/>
         </zeroOrMore>
       </element>
+    </define>
+
+    <define name="db.biblioref">
+      <ref name="hub.biblioref"/>
     </define>
   </include>
 
