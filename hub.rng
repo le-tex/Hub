@@ -482,9 +482,14 @@
 
   <define name="hub.body.components">
     <choice>
-      <zeroOrMore>
-        <ref name="db.all.blocks"/>
-      </zeroOrMore>
+      <group>
+        <zeroOrMore>
+          <ref name="db.all.blocks"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="db.bibliography"/>
+        </zeroOrMore>
+      </group>
       <choice>
         <ref name="db.book.components"/>
         <ref name="db.article.components"/>
