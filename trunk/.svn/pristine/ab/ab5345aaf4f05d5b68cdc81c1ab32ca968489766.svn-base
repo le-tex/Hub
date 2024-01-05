@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-
-  <rewriteURI uriStartString="http://www.le-tex.de/resource/schema/hub/1.2/" rewritePrefix="../"/>
-  <rewriteURI uriStartString="http://www.le-tex.de/resource/schema/hub/1.1/" rewritePrefix="../"/>
-    
-</catalog>
