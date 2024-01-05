@@ -1,0 +1,901 @@
+<?xml version="1.0"?>
+<grammar
+  xmlns="http://relaxng.org/ns/structure/1.0"
+  xmlns:db="http://docbook.org/ns/docbook"
+  xmlns:css="http://www.w3.org/1996/css"
+  xmlns:s="http://purl.oclc.org/dsdl/schematron"
+  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:idml2xml="http://transpect.io/idml2xml"
+  xmlns:tr="http://transpect.io"
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+  ns="http://docbook.org/ns/docbook"
+  >
+
+  <s:ns prefix="db" uri="http://docbook.org/ns/docbook"/>
+  <s:ns prefix="css" uri="http://www.w3.org/1996/css"/>
+  <s:ns prefix="xlink" uri="http://www.w3.org/1999/xlink"/>
+  <s:ns prefix="idml2xml" uri="http://transpect.io/idml2xml"/>
+
+  <html:h1>le-tex Hub Format</html:h1>
+
+  <html:p>Hub is a DocBook 5.1 (precisely: DocBook Publishers V5.1CR2-1, which includes poetry and RDFa lite, among other things)
+    derivative with the following modifications:</html:p>
+
+  <html:ul>
+    <html:li>
+      <html:p>'hub' is the an additional top-level element that contains only block-level content (paras, lists, figures, etc.),
+      but no hierarchy (section, chapter, part, etc.).</html:p>
+    </html:li>
+    <html:li>
+      <html:p>There is an optional /*/info[@role='hub'] element that contains certain keywords (keyword[@role='…']):</html:p>
+      <html:ul>
+        <html:li>
+          <html:p>hierarchized (boolean): whether there is a proper nested part/chapter/section hierarchy</html:p>
+        </html:li>
+        <html:li>
+          <html:p>formatting-deviations-only (boolean): whether the css and css-like attributes on content elements 
+            contain only deviations from what is defined in the corresponding 'style'. Necessitates that there is 
+            a 'styles' section (see below)</html:p>
+        </html:li>
+        <html:li>
+          <html:p>marked-identifiers (boolean): whether all identifiers in list items, section titles etc. have been made explicit 
+            and have been enclosed in a phrase[@role='hub:identifier'] element</html:p>
+        </html:li>
+        <html:li>
+          <html:p>processed-lists (boolean): whether lists have been grouped and nested</html:p>
+        </html:li>
+        <html:li>
+          <html:p>titles-associated-with-floats (boolean): whether all figure/table/example titles have been grouped with their content</html:p>
+        </html:li>
+        <html:li>
+          <html:p>source-type ('idml', 'docx', 'xhtml11', 'epub20', 'epub30')</html:p>
+        </html:li>
+        <html:li>
+          <html:p>footnote-restart whether footnotes are recounted section wise in InDesign (boolean)</html:p>
+        </html:li>
+        <html:li>
+          <html:p>type-area-width width of type area in InDesign</html:p>
+        </html:li>
+      </html:ul>
+      <html:p>The attributes should be set by converters that perform the corresponding tasks (e.g., hierarchize).
+        Missing boolean attributes must be treated as 'false'. Presence of a 'true'-valued attribute does not guarantee
+        that the content is actually in accordance with this property (e.g., all lists properly nested, all headings
+        hierarchized, …). It is just a hint for checking rules that they may justifiedly warn about paragraphs that
+        look like unprocessed lists or like headings in the middle of a section’s content.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>Styling may be expressed as CSS attributes. See css/css.rng for documentation. Custom attributes that don’t follow CSS 3
+      or 2.1 semantics may be included in the Hub (i.e., DocBook) or any other namespace that is deemed appropriate.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>Paragraph, character, table, and cell styles may be included below a 'css:rules' element in /*/info </html:p>
+    </html:li>
+    <html:li>
+      <html:p>In addition to CSS attributes, paragraph styles defintions may contain a list of tab stops ('tab') in a 'tabs' element. 
+      The 'tabs' element may also be present in 'para' and 'title'.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>There are additional inline elements: 'tab' and 'br'. Note that the inline 'tab' follows a content model
+        that is different from the tabs/tab element (in the tab declarations).</html:p>
+    </html:li>
+    <html:li>
+      <html:p>There is also a generic container, 'div'. It is meant to substitute the (ab)use of 'sidebar' for frame-based,
+        possibly anchored, content and pure layout constructs such as the frames itself. They may play a role if CSS regions
+        or the like are adopted in Hub XML.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>itemizedlist/@mark and listitem/@override are treated as literal list marker strings, rather than as names of
+        something.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>SVG 1.1 and MathML 3 (restricted – the 2.0-compatible version) are included.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>There are mandatory and fixed attributes on /*: @version, @css:version, and
+        @css:host-vocabulary-rule-selection-attribute. The latter binds DocBook’s @role attribute to selecting a
+        css:rule whose name corresponds to the @role attribute value (just like @class does for HTML).</html:p>
+    </html:li>
+    <html:li>
+      <html:p>An attribute @srcpath (a URI, e.g., file:/path/to/my.idml?xpath=/Story/…) may be attached on almost every element.
+      It may be used by processes that collect errors and warnings (together with the paths where they occurred) to render
+      the messages at the corresponding locations in an HTML report.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>Element programlisting (not included in DocBook Publishers V5.1CR2-1): unlike DocBook V5.1CR2 there are info/title, line and linegroup elements possible.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>Index: to give generated page numbers a different style you can insert for example 'hub:pagenum-italic' or
+      'hub:pagenum-bold' to indexterm/@role, so used by le-tex docx2hub and idml2xml.</html:p>
+    </html:li>
+    <html:li>
+      <html:p>To center an floatable object use css:margin-left="auto" and css:margin-right="auto", for left 
+      alignment css:margin-left="0" plus css:margin-right="auto" and align right use
+      css:margin-left="auto" and css:margin-right="0" (see for example tables in docx2hub).</html:p>
+    </html:li>
+  </html:ul>
+
+  <include href="css/cssa-publisher-extensions.rng">
+
+    <define name="custom.css-like.attributes">
+      <ref name="hub.att.numbering-starts-at"/>
+      <ref name="hub.att.numbering-level"/>
+      <ref name="hub.att.numbering-continue"/>
+      <ref name="hub.att.numbering-multilevel-type"/>
+      <ref name="hub.att.para-border"/>
+      <ref name="hub.att.para-border-color"/>
+      <ref name="hub.att.para-border-style"/>
+      <ref name="hub.att.para-border-top-width"/>
+      <ref name="hub.att.para-border-right-width"/>
+      <ref name="hub.att.para-border-bottom-width"/>
+      <ref name="hub.att.para-border-left-width"/>
+      <ref name="hub.att.para-border-padding-top"/>
+      <ref name="hub.att.para-border-padding-right"/>
+      <ref name="hub.att.para-border-padding-bottom"/>
+      <ref name="hub.att.para-border-padding-left"/>
+      <ref name="hub.att.para-background"/>
+      <ref name="hub.att.para-background-color"/>
+      <ref name="hub.att.para-background-padding-top"/>
+      <ref name="hub.att.para-background-padding-right"/>
+      <ref name="hub.att.para-background-padding-bottom"/>
+      <ref name="hub.att.para-background-padding-left"/>
+    </define>
+
+    <define name="custom.css_element_model">
+      <interleave>
+        <optional>
+          <ref name="hub.tabs.declaration.element"/>
+        </optional>
+        <optional>
+          <ref name="hub.style-link.element"/>
+        </optional>
+      </interleave>
+    </define>
+
+    <define name="custom.css-like.rule.attributes">
+      <optional>
+          <ref name="db.remap.attribute"/>
+        </optional>
+    </define>
+  </include>
+
+  <include href="mml/mathml3-restricted.rng">
+    <start combine="choice">
+      <notAllowed/>
+    </start>
+    <define name="anyElement">
+      <a:documentation>Will get an error message pertaining to xml:id when leaving it as is.
+      Didn’t do research as to why.</a:documentation>
+      <empty/>
+    </define>
+  </include>
+
+  <include href="svg/svg11.rng">
+    <start combine="choice">
+      <notAllowed/>
+    </start>
+  </include>
+
+  
+  <define name="db.keyword.inlines">
+    <choice>
+      <text/>
+      <ref name="db.math.inlines"/>
+      <ref name="db._phrase"/>
+      <ref name="db.subscript"/>
+      <ref name="db.superscript"/>
+      <ref name="db.abbrev"/>
+      <ref name="db.acronym"/>
+    </choice>
+  </define>
+
+  <define name="hub.biblioref">
+    <choice>
+      <element name="biblioref">
+        <a:documentation>A cross-reference to a bibliographic entry</a:documentation>
+        <ref name="db.biblioref.attlist"/>
+        <empty/>
+      </element>
+      <element name="biblioref">
+        <a:documentation>A cross reference to a biblio entry already containing text</a:documentation>
+        <choice>
+          <ref name="db.linkends.attribute"/>
+          <ref name="db.linkend.attribute"/>
+        </choice>
+        <optional>
+          <ref name="db.common.attributes"/>
+        </optional>
+        <oneOrMore>
+          <choice>
+            <text/>
+            <ref name="db.ubiq.inlines"/>
+            <ref name="db._phrase"/>
+          </choice>
+        </oneOrMore>
+      </element>
+    </choice>
+  </define>
+
+  <include href="dbk/docbook.rng">
+    <define name="db.version.attribute">
+      <attribute name="version">
+        <value>5.1-variant le-tex_Hub-1.2</value>
+      </attribute>
+      <optional>
+        <ref name="css_att.version"/>
+      </optional>
+    </define>
+    
+    <define name="db._any">
+      <empty/>
+    </define>
+    <define name="db._any.attribute">
+      <empty/>
+    </define>
+    <define name="db._any.mml">
+      <ref name="math"/>
+    </define>
+    <define name="db._any.svg">
+      <ref name="svg"/>
+    </define>
+    
+    <define name="db.title">
+      <element name="title">
+        <a:documentation>The text of the title of a section of a document or of a formal block-level element</a:documentation>
+        <ref name="db.title.attlist"/>
+        <ref name="hub.declare.tabs"/>
+        <zeroOrMore>
+          <ref name="db.all.inlines"/>
+        </zeroOrMore>
+      </element>
+    </define>
+
+    <define name="db.set">
+      <element name="set">
+        <a:documentation>A collection of Hub documents</a:documentation>
+        <ref name="db.common.base.attributes"/>
+        <optional>
+          <ref name="db.title"/>
+        </optional>
+        <optional>
+          <ref name="db._info.title.forbidden"/>
+        </optional>
+        <oneOrMore>
+          <ref name="hub.root"/>
+        </oneOrMore>
+      </element>
+    </define>
+
+    <define name="db.para">
+      <element name="para">
+        <a:documentation>A paragraph</a:documentation>
+        <ref name="db.para.attlist"/>
+        <interleave>
+          <ref name="db.para.info"/>
+          <ref name="hub.declare.tabs"/>
+        </interleave>
+        <zeroOrMore>
+          <choice>
+            <ref name="db.all.inlines"/>
+            <ref name="db.nopara.blocks"/>
+          </choice>
+        </zeroOrMore>
+      </element>
+    </define>
+
+    <define name="db.verbatim.blocks">
+      <choice>
+        <ref name="db.literallayout"/>
+        <ref name="db.programlisting"/>
+      </choice>
+    </define>
+
+    <define name="db.abstract">
+      <element name="abstract">
+        <a:documentation>A summary. Section and block elements allowed (DocBook: element para, only)</a:documentation>
+        <ref name="db.abstract.attlist"/>
+        <ref name="db.abstract.info"/>
+        <ref name="db.toplevel.blocks.or.sections"/>
+      </element>
+    </define>
+
+    <define name="db.formalpara">
+      <element name="formalpara">
+        <a:documentation>One (or more) paragraphs with a title</a:documentation>
+        <ref name="db.formalpara.attlist"/>
+        <ref name="db.formalpara.info"/>
+        <zeroOrMore>
+          <ref name="db.indexing.inlines"/>
+        </zeroOrMore>
+        <oneOrMore>
+          <ref name="db.para"/>
+        </oneOrMore>
+      </element>
+      </define>
+
+    <define name="db.sidebar.info">
+      <optional>
+        <ref name="db._info"/>
+      </optional>
+    </define>
+
+    <!-- enforced block-level-content -->
+    <define name="db.entry">
+       <element name="entry">
+          <a:documentation>A cell in a table</a:documentation>
+          <s:pattern>
+             <s:rule context="db:entry">
+                <s:assert test="not(.//db:table)">table must not occur among the children or descendants of entry</s:assert>
+             </s:rule>
+          </s:pattern>
+          <ref name="db.entry.attlist"/>
+          <zeroOrMore>
+             <ref name="db.all.blocks"/>
+          </zeroOrMore>
+       </element>
+    </define>
+
+    <define name="db.indexterm.contentmodel">
+      <choice>
+        <optional>
+          <ref name="db.primary"/>
+          <optional>
+            <ref name="db.secondary"/>
+            <optional>
+              <ref name="db.tertiary"/>
+              <optional>
+                <element name="quaternary">
+                  <a:documentation>A quaternary word or phrase in an index term</a:documentation>
+                  <ref name="db.tertiary.attlist"/>
+                  <zeroOrMore>
+                    <ref name="db.all.inlines"/>
+                  </zeroOrMore>
+                </element>
+                <optional>
+                  <element name="quinary">
+                    <a:documentation>A quinary word or phrase in an index term</a:documentation>
+                    <ref name="db.tertiary.attlist"/>
+                    <zeroOrMore>
+                      <ref name="db.all.inlines"/>
+                    </zeroOrMore>
+                  </element>
+                  <optional>
+                    <element name="senary">
+                      <a:documentation>A senary word or phrase in an index term</a:documentation>
+                      <ref name="db.tertiary.attlist"/>
+                      <zeroOrMore>
+                        <ref name="db.all.inlines"/>
+                      </zeroOrMore>
+                    </element>
+                    <optional>
+                      <element name="septenary">
+                        <a:documentation>A septenary word or phrase in an index term</a:documentation>
+                        <ref name="db.tertiary.attlist"/>
+                        <zeroOrMore>
+                          <ref name="db.all.inlines"/>
+                        </zeroOrMore>
+                      </element>
+                      <optional>
+                        <element name="octonary">
+                          <a:documentation>A octonary word or phrase in an index term</a:documentation>
+                          <ref name="db.tertiary.attlist"/>
+                          <zeroOrMore>
+                            <ref name="db.all.inlines"/>
+                          </zeroOrMore>
+                        </element>
+                        <optional>
+                          <element name="nonary">
+                            <a:documentation>A nonary word or phrase in an index term</a:documentation>
+                            <ref name="db.tertiary.attlist"/>
+                            <zeroOrMore>
+                              <ref name="db.all.inlines"/>
+                            </zeroOrMore>
+                          </element>
+                          <optional>
+                            <element name="denary">
+                              <a:documentation>A denary word or phrase in an index term</a:documentation>
+                              <ref name="db.tertiary.attlist"/>
+                              <zeroOrMore>
+                                <ref name="db.all.inlines"/>
+                              </zeroOrMore>
+                            </element>
+                          </optional>
+                        </optional>
+                      </optional>
+                    </optional>
+                  </optional>
+                </optional>
+              </optional>
+            </optional>
+          </optional>
+        </optional>
+      </choice>
+      <optional>
+        <ref name="db.see"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="db.seealso"/>
+      </zeroOrMore>
+    </define>
+
+    <define name="db.itemizedlist.mark.attribute">
+      <attribute name="mark">
+        <a:documentation>Literal string to be used as a list marker for all items without override.</a:documentation>
+        <data type="string"/>
+      </attribute>
+    </define>
+
+    <define name="db.listitem.override.attribute">
+      <attribute name="override">
+        <a:documentation>Literal string that should be used as a list marker.</a:documentation>
+        <data type="string"/>
+      </attribute>
+    </define>
+    
+    <define name="db.technical.blocks"><notAllowed/></define>
+
+    <define name="db.common.req.linking.attributes">
+      <choice>
+        <ref name="db.linkend.attribute"/>
+        <ref name="db.linkends.attribute"/>
+        <ref name="db.xlink.attributes"/>
+      </choice>
+    </define>
+    
+    <define name="db.floatstyle.attribute">
+      <attribute name="floatstyle">
+        <a:documentation>Either object is floating (position near reference),
+        top (floating but positioned at top of the page), bottom (floating,
+        but positioned at the bottom of the page or fixed (i.e. anchored
+        with a paragraph).</a:documentation>
+         <choice>
+           <value>float</value>
+           <value>top</value>
+           <value>bottom</value>
+           <value>fixed</value>
+         </choice>
+      </attribute>
+    </define>
+
+    <define name="db.colspec.colwidth.attribute">
+      <attribute name="colwidth">
+        <a:documentation>Specifies the width of the column. 
+          Value must match definition of css_pattern.width.</a:documentation>
+        <ref name="css_pattern.width"/>
+      </attribute>
+    </define>
+
+    <define name="db.keyword">
+      <element name="keyword">
+        <a:documentation>One of a set of keywords describing the content of a document</a:documentation>
+        <ref name="db.keyword.attlist"/>
+        <zeroOrMore>
+          <ref name="db.keyword.inlines"/>
+        </zeroOrMore>
+      </element>
+    </define>
+
+    <define name="db.biblioref">
+      <ref name="hub.biblioref"/>
+    </define>
+  </include>
+
+  <start combine="choice">
+    <ref name="hub.root"/>
+  </start>
+
+  <define name="hub.body.components">
+    <choice>
+      <group>
+        <zeroOrMore>
+          <ref name="db.all.blocks"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="db.bibliography"/>
+        </zeroOrMore>
+      </group>
+      <choice>
+        <ref name="db.book.components"/>
+        <ref name="db.article.components"/>
+      </choice>
+    </choice>
+  </define>
+
+  <define name="hub.root">
+    <element name="hub">
+      <ref name="db.common.base.attributes"/>
+      <optional>
+        <ref name="db.info"/>
+      </optional>
+      <ref name="hub.body.components"/>
+    </element>
+  </define>
+
+  <define name="db.all.blocks" combine="choice">
+    <choice>
+      <ref name="hub.div"/>
+      <ref name="hub.table-group"/>
+      <ref name="hub.figure-group"/>
+    </choice>
+  </define>
+
+  <define name="hub.div">
+    <a:documentation>Allow div as a generic nestable container without semantic 
+    implications (just like an HTML div)</a:documentation>
+    <element name="div">
+      <ref name="db.common.attributes"/>
+      <optional>
+        <attribute name="role"/>
+      </optional>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="db.all.blocks"/>
+          <empty/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  
+  <define name="hub.table-group">
+    <a:documentation>Allow table-group to hold a set of tables. With an extra title, optionally.</a:documentation>
+    <element name="table-group">
+      <ref name="db.common.attributes"/>
+      <optional>
+        <attribute name="role"/>
+      </optional>
+      <optional>
+        <ref name="db.title"/>
+      </optional>
+      <oneOrMore>
+        <ref name="db.table"/>
+      </oneOrMore>
+    </element>
+  </define>
+  
+  <define name="hub.figure-group">
+    <a:documentation>Allow figure-group to hold a set of figures. With an extra title, optionally.</a:documentation>
+    <element name="figure-group">
+      <ref name="db.common.attributes"/>
+      <optional>
+        <attribute name="role"/>
+      </optional>
+      <optional>
+        <ref name="db.title"/>
+      </optional>
+      <oneOrMore>
+        <ref name="db.figure"/>
+      </oneOrMore>
+    </element>
+  </define>
+
+  <define name="db.publishing.inlines" combine="choice">
+    <choice>
+      <ref name="hub.inline.tab"/>
+      <ref name="hub.inline.br"/>
+    </choice>
+  </define>
+
+  <define name="db.extension.blocks" combine="choice">
+      <ref name="hub.block.hr"/>
+  </define>
+
+  <define name="db.common.base.attributes" combine="interleave">
+    <optional>
+      <ref name="css_meta_att.rule-map"/>
+    </optional>
+  </define>
+    
+  <define name="db.common.attributes" combine="interleave">
+    <ref name="hub.att.srcpath"/>
+    <ref name="css_attributes"/>
+    <ref name="hub.tr-module-specific.atts"/>
+  </define>
+
+  <define name="hub.att.srcpath">
+    <optional>
+      <attribute name="srcpath">
+        <data type="anyURI"/>
+      </attribute>
+    </optional>
+  </define>
+  
+  <define name="hub.tr-module-specific.atts">
+    <a:documentation>Allowed attributes from base libraries, i.e. docx2hub, idml2xml</a:documentation>
+    <optional>
+      <attribute name="idml2xml:layer">
+        <data type="string"/>
+      </attribute>
+    </optional>
+  </define>
+  
+  <div>
+    <define name="db.programlisting.role.attribute">
+      <attribute name="role"/>
+    </define>
+
+    <define name="db.programlisting.width.attribute">
+      <ref name="db.width.characters.attribute"/>
+    </define>
+
+    <define name="db.programlisting.attlist">
+      <interleave>
+        <optional>
+          <ref name="db.programlisting.role.attribute"/>
+        </optional>
+        <ref name="db.common.attributes"/>
+        <ref name="db.common.linking.attributes"/>
+        <ref name="db.verbatim.attributes"/>
+        <optional>
+          <ref name="db.programlisting.width.attribute"/>
+        </optional>
+      </interleave>
+    </define>
+
+    <define name="db.programlisting">
+      <element name="programlisting">
+        <a:documentation>A literal listing of all or part of a program</a:documentation>
+        <ref name="db.programlisting.attlist"/>
+        <ref name="db.programlisting.contentmodel"/>
+      </element>
+    </define>
+    
+    <define name="db.programlisting.contentmodel">
+      <ref name="db._info.title.only"/>
+      <choice>
+        <ref name="db.textobject"/>
+        <oneOrMore>
+          <choice>
+            <ref name="db.linegroup"/>
+            <ref name="db.line"/>
+          </choice>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="db.verbatim.inlines"/>
+        </zeroOrMore>
+      </choice>
+    </define>
+  </div>
+
+  <define name="db.info.elements" combine="interleave">
+    <optional>
+      <ref name="css_element.rules" />
+    </optional>
+  </define>
+
+  <define name="db.section.attlist" combine="interleave">
+    <ref name="db.bridgehead.renderas-enum.attribute"/>
+  </define>
+  
+  <define name="db.bridgehead.renderas.enumeration" combine="choice">
+    <choice>
+      <value>sect6</value>
+      <value>sect7</value>
+      <value>sect8</value>
+      <value>sect9</value>
+      <value>sect10</value>
+    </choice>
+  </define>
+  
+  <div>
+    <define name="db.annotation.role.attribute">
+      <attribute name="role"/>
+    </define>
+    <define name="db.annotation.annotates.attribute">
+      <attribute name="annotates">
+        <a:documentation>Identifies one ore more elements to which this annotation applies</a:documentation>
+      </attribute>
+    </define>
+    <define name="db.annotation.attlist">
+      <interleave>
+        <optional>
+          <ref name="db.annotation.role.attribute"/>
+        </optional>
+        <optional>
+          <ref name="db.annotation.annotates.attribute"/>
+        </optional>
+        <ref name="db.common.attributes"/>
+      </interleave>
+    </define>
+    <define name="db.annotation.info">
+      <ref name="db._info.title.only"/>
+    </define>
+    <define name="db.annotation">
+      <element name="annotation">
+        <a:documentation>An annotation</a:documentation>
+        <s:pattern>
+          <s:rule context="db:annotation">
+            <s:assert test="not(.//db:annotation)">annotation must not occur in the descendants of annotation</s:assert>
+          </s:rule>
+        </s:pattern>
+        <ref name="db.annotation.attlist"/>
+        <ref name="db.annotation.info"/>
+        <oneOrMore>
+          <ref name="db.all.blocks"/>
+        </oneOrMore>
+      </element>
+    </define>
+  </div>
+  
+  <define name="db.ubiq.inlines" combine="choice">
+    <ref name="db.annotation"/>
+  </define>
+  
+  <define name="hub.inline.tab">
+    <element name="tab">
+      <ref name="hub.att.srcpath"/>
+      <optional>
+        <ref name="hub.inline.tab.role"/>
+      </optional>
+      <optional>
+        <ref name="db.verbatim.xml.space.attribute"/>
+      </optional>
+    </element>
+  </define>
+
+  <define name="hub.inline.tab.role">
+    <attribute name="role">
+      <choice>
+        <value>end-nested-style</value>
+        <value>footnotemarker</value>
+        <value>indent-to-here</value>
+        <value>hub:separator</value>
+        <value>docx2hub:generated</value>
+        <value>left</value>
+        <value>right</value>
+      </choice>
+    </attribute>
+  </define>
+
+  <define name="hub.inline.br">
+    <element name="br">
+      <ref name="db.common.attributes"/>
+      <empty/>
+    </element>
+  </define>
+
+  <define name="hub.block.hr">
+    <a:documentation>As in http://dev.w3.org/html5/markup/hr.html
+    May also used to capture thematic breaks expressed as *** lines.
+    You may use CSS like css:content="'***'" css:text-justify="center" css:font-weight="bold"</a:documentation>
+    <element name="hr">
+      <ref name="db.common.attributes"/>
+      <empty/>
+    </element>
+  </define>
+
+  <div>
+    <a:documentation>Container for mc:AlternateContent/w:drawing etc. for which no Hub representation exists.</a:documentation>
+    <define name="hub._any.attribute">
+      <attribute>
+        <a:documentation>Any attribute, including any attribute in any namespace.</a:documentation>
+        <anyName/>
+      </attribute>
+    </define>
+
+    <define name="hub._any">
+      <element>
+        <a:documentation>Any element from almost any namespace</a:documentation>
+        <anyName>
+          <except>
+            <nsName/>
+            <nsName ns="http://www.w3.org/1999/xhtml"/>
+            <nsName ns="http://www.w3.org/1998/Math/MathML"/>
+            <nsName ns="http://www.w3.org/2000/svg"/>
+          </except>
+        </anyName>
+        <zeroOrMore>
+          <choice>
+            <ref name="hub._any.attribute"/>
+            <text/>
+            <ref name="hub._any"/>
+            <ref name="db.all.blocks"/>
+          </choice>
+        </zeroOrMore>
+      </element>
+    </define>
+    
+    <define name="hub.foreign.phrase">
+      <element name="phrase">
+        <attribute name="role">
+          <value>hub:foreign</value>
+        </attribute>
+        <ref name="hub.att.srcpath"/>
+        <zeroOrMore>
+          <ref name="hub._any"/>
+        </zeroOrMore>
+      </element>
+    </define>
+    
+    <define name="db.phrase" combine="choice">
+      <ref name="hub.foreign.phrase"/>
+    </define>
+  </div>
+
+  <a:documentation>
+    archive-dir-uri: URI of the directory containing the .idml, .docx, … container file. Should be used by applications
+    that process images etc. that reside outside the container and that are linked to with a relative path. 
+    archive-uri: URI of the .idml, .docx, … container file. If the file was fetched via HTTP, this is different from:
+    archive-uri-local: URI of the .idml, .docx, … container file, stored locally. It is the same as archive-uri if
+    the conversion input already resided at a file: URI. 
+    source-dir-uri: URI of the (temporary) directory where the archive was unzipped. Should be used by applications that 
+    process unzipped archive content.    
+  </a:documentation>
+  <s:pattern>
+    <s:let
+      name="boolean-hub-keywords" 
+      value="(
+               'used-rules-only', 
+               'hierarchized',
+               'mathtype2mml',
+               'formatting-deviations-only',
+               'layout-attributes-permitted-on-phrase',
+               'processed-lists',
+               'endnote-restart',
+               'footnote-restart',
+               'marked-identifiers',
+               'source-paths',
+               'table-captions-moved-above-tables',
+               'titles-associated-with-floats'
+             )" />
+    <s:let
+      name="hub-keywords" 
+      value="(
+               $boolean-hub-keywords,
+               'archive-dir-uri',
+               'archive-uri',
+               'archive-uri-local',
+               'source-type',
+               'source-application',
+               'source-basename',
+               'source-dir-uri',
+               'toc-title',
+               'type-area-width'
+             )" />
+    <s:let
+      name="hub-source-types" 
+      value="('idml', 'docx', 'xhtml10', 'xhtml11', 'xhtml5', 'epub20', 'epub30', 'odt')" />
+    <s:rule context="db:info/db:keywordset[@role eq 'hub']/db:keyword">
+      <s:assert test="@role = $hub-keywords" role="WRN">Hub keywords must have one of these role attributes: [<s:value-of select="$hub-keywords"/>]. Found: <s:value-of select="@role"/>.
+      </s:assert>
+    </s:rule>
+    <s:rule context="db:info/db:keywordset[@role eq 'hub']/db:keyword[@role = $boolean-hub-keywords]">
+      <s:assert test=". = ('true', 'false')" role="ERR">Boolean Hub keywords must be either 'true' or 'false'.
+      </s:assert>
+    </s:rule>
+    <s:rule context="db:info/db:keywordset[@role eq 'hub']/db:keyword[@role = 'source-type']">
+      <s:assert test=". = $hub-source-types" role="WRN">Hub keyword source-type must be one of [<s:value-of select="$hub-source-types"/>].
+      </s:assert>
+    </s:rule>
+  </s:pattern>
+
+  <s:pattern>
+    <s:rule context="/*[.//*[@css:*]]">
+      <s:assert test="@css:version">If CSS attributes are used, the css:version attribute is mandatory.</s:assert>
+    </s:rule>
+  </s:pattern>
+
+  <s:pattern>
+    <s:rule context="css:rule[db:tabs]">
+      <s:assert test="@layout-type = 'para'">Tab declarations are only meaningful within paragraph styles.</s:assert>
+    </s:rule>
+  </s:pattern>
+
+  <s:pattern>
+    <s:rule context="css:rule[db:linked-style]">
+      <s:let name="layout-type" value="db:linked-style/@layout-type"/>
+      <s:let name="name" value="db:linked-style/@name"/>
+      <s:assert test="exists(../css:rule[@layout-type = $layout-type][@name = $name])">Linking to non-existing <s:value-of select="$layout-type"/> style named <s:value-of select="$name"/>.</s:assert>
+    </s:rule>
+  </s:pattern>
+
+  <s:pattern>
+    <s:rule context="css:rule">
+      <s:let name="layout-type" value="@layout-type"/>
+      <s:let name="name" value="@name"/>
+      <s:report test="count(../css:rule[if ($layout-type) then (@layout-type = $layout-type) else true()][@name = $name]) gt 1">More than one style of type '<s:value-of select="$layout-type"/>' with the name '<s:value-of select="$name"/>'.</s:report>
+    </s:rule>
+  </s:pattern>
+  
+</grammar>
