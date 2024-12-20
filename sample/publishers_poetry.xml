@@ -32,7 +32,7 @@
   <poetry role="center" css:page="foo">
     <info>
       <title>Hub 1.1 basiert jetzt auf DocBook Publishers V5.1CR1-1</title>
-      <bibliomisc>(gimsieke, 2013)</bibliomisc>
+      <bibliosource>(gimsieke, 2013)</bibliomisc>
     </info>
     <linegroup>
       <line>Welt-Herrschaftsplan leider zunichte:</line>
