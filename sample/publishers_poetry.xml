@@ -30,16 +30,16 @@
   </equation>
   
   <poetry role="center" css:page="foo">
-    <info>
-      <title>Hub 1.1 basiert jetzt auf DocBook Publishers V5.1CR1-1</title>
-      <bibliosource>(gimsieke, 2013)</bibliomisc>
-    </info>
+    <title>Hub 1.1 basiert jetzt auf DocBook Publishers V5.1CR1-1</title>
     <linegroup>
       <line>Welt-Herrschaftsplan leider zunichte:</line>
       <line>Im Hubformat fehlen Gedichte!</line>
       <line>Doch bevor ich arg schwitz</line>
       <line>Und Tags customized schnitz,</line>
       <line>Ich nach Publishers DocBook mich richte.</line>
+    </linegroup>
+    <linegroup role="credit">
+      <line>(gimsieke, 2013)</line>
     </linegroup>
   </poetry>
 </hub>
